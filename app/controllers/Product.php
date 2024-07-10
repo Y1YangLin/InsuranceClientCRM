@@ -1,6 +1,6 @@
 <?php
-
-class ProductController{
+// TEST CODE
+class Product{
 
     public function processRequest(string $method, ?string $id): void
     {
