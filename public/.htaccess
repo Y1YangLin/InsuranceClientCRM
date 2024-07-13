@@ -2,7 +2,7 @@
   Options -Multiviews
   RewriteEngine on
 
-  # RewriteBase /clinico/public will occur 500 internal server error
+  # RewriteBase /clinico/public will reduce 500 internal server error
   RewriteBase /
 
   RewriteCond %{REQUEST_FILENAME} !-d
