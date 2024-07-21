@@ -1,0 +1,15 @@
+{
+    "name": "yi-yang/clinico",
+    "autoload": {
+        "psr-4": {
+            "app\\": "./"
+        }
+    },
+    "authors": [
+        {
+            "name": "Yi Yang",
+            "email": "minecr225@gmail.com"
+        }
+    ],
+    "require": {}
+}
