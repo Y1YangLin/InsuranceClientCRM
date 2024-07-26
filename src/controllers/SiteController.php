@@ -2,9 +2,11 @@
 
 namespace YiYang\Clinico\controllers;
 
+use YiYang\Clinico\core\Controller;
 use YiYang\Clinico\core\Application;
+use YiYang\Clinico\core\Request;
 
-class SiteController{
+class SiteController extends Controller{
 
 
     public function home()
@@ -13,16 +15,18 @@ class SiteController{
             "name" => "LYY"
         ];
 
-        return Application::$app->router->renderView("home", $params);
+        return $this->render("home", $params);
     }
 
     public function contact()
     {
-        return Application::$app->router->renderView("contact");
+        return $this->render("contact");
     }
 
-    public function handleContact()
+    public function handleContact(Request $request)
     {
+        $body = $request->getBody();
+
         return "Handling Submited data";
     }
 

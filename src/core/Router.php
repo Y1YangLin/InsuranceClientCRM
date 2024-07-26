@@ -31,7 +31,7 @@ class Router
     public function resolve()
     {
         $path = $this->request->getPath();
-        $method = $this->request->getMethod();
+        $method = $this->request->method();
         
         $callback = $this->routes[$method][$path] ?? false;
 
@@ -49,15 +49,17 @@ class Router
         }
 
 
-        // 
+        // create an instance of controller class name , so call_user_func can work
+        // Originally it was string then instance
         if (is_array($callback)){
-            $callback[0] = new $callback[0]();
+            Application::$app->controller = new $callback[0]();
+            $callback[0] = Application::$app->controller;
         }  
 
         // var_dump($callback);
         // exit;
 
-        return call_user_func($callback);
+        return call_user_func($callback, $this->request);
     
     }
 
@@ -88,21 +90,27 @@ class Router
 
     protected function layoutContent()
     {
+
+        $layout = Application::$app->controller->layout;
         ob_start();
-        include_once Application::$ROOT_DIR . "/src/views/layouts/main.php";
+        include_once Application::$ROOT_DIR . "/src/views/layouts/$layout.php";
         return ob_get_clean();
     }
 
     protected function renderOnlyView($view, $params)
     {
 
-        foreach ($params as $key => $value) {
+        //  $params = [
+            //        'name' => 'John',
+            //        'age' => 30,
+            //        'city' => 'New York'
+            //    ];
+            //將會創建 $name, $age, $city variables, 其值分別為 "John", 30, "New York"
+
+        foreach ($params as $key => $value) {  
             $$key = $value;
         }
-
-        var_dump($name);
-        exit;
-
+        
         ob_start();
         include_once Application::$ROOT_DIR . "/src/views/$view.php";
         return ob_get_clean();
