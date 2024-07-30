@@ -2,7 +2,7 @@
     "name": "yi-yang/clinico",
     "autoload": {
         "psr-4": {
-            "app\\": "./"
+            "YiYang\\Clinico": "./src"
         }
     },
     "authors": [

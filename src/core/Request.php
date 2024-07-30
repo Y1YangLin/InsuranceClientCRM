@@ -24,6 +24,8 @@ class Request
 
     public function method()
     {
+        // var_dump($_SERVER["REQUEST_METHOD"]);
+        // exit;
         return strtolower($_SERVER["REQUEST_METHOD"]);
     }
 
@@ -48,10 +50,14 @@ class Request
         }
 
         if ($this->method() === "post"){
-            foreach($_GET as $key => $value){
+            foreach($_POST as $key => $value){
                 $body[$key] = filter_input(INPUT_POST, $key, FILTER_SANITIZE_SPECIAL_CHARS);
             }
         }
+
+        // var_dump($body);
+        // var_dump($_POST);
+        // exit;
 
         return $body;
     }

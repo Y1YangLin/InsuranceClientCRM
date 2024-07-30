@@ -1,20 +1,27 @@
 <?php
 
-
+// var_dump($errors);
+// exit;
 ?>
 
 <h1>Create an account</h1>
 
 <form action="" method="post">
 
-    <div class="form-group">
-        <label>First name</label>
-        <input type="text" name="firstname" class="form-control">
-    </div>
+    <div class="row">
+        <div class="col">
+            <div class="form-group">
+                <label>First name</label>
+                <input type="text" name="firstname" class="form-control">
+            </div>
+        </div>
 
-    <div class="form-group">
-        <label>Last name</label>
-        <input type="text" name="lastname" class="form-control">
+        <div class="col">
+            <div class="form-group">
+                <label>Last name</label>
+                <input type="text" name="lastname" class="form-control">
+            </div>
+        </div>
     </div>
 
     <div class="form-group">
@@ -30,11 +37,6 @@
     <div class="form-group">
         <label>Confirm Password</label>
         <input type="password" name="confirmPassword" class="form-control">
-    </div>
-
-    <div class="form-group">
-        <label>Body</label>
-        <input type="text" name="body" class="form-control">
     </div>
 
     <button type="submit" class="btn btn-primary">Submit</button>

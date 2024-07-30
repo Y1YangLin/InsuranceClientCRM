@@ -5,7 +5,7 @@
 
 <h1>Contact</h1>
 
-<form action="" method="post">
+<form action="/contact" method="post">
 
     <div class="form-group">
         <label>Subject</label>
