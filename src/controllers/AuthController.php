@@ -26,14 +26,11 @@ class AuthController extends Controller{
             
             $registerModel->loadData($request->getBody());
             
+            // validation data from frontend
             if($registerModel->validate() && $registerModel->register()){
                 return "SUCCESS";
             }
 
-            echo "<pre>";
-            var_dump($registerModel->errors);
-            echo "</pre>";
-            exit;
 
             // 以下的 validation 寫法會寫一堆 if 判斷句讓Controller 看起來比較不乾淨，比較好的寫法是用model call functons
             // if(!$firstname){

@@ -1,44 +1,20 @@
-<?php
-
-// var_dump($errors);
-// exit;
-?>
-
 <h1>Create an account</h1>
 
-<form action="" method="post">
+<?php $form = \YiYang\Clinico\core\form\Form::begin('', 'post') ?>
 
     <div class="row">
         <div class="col">
-            <div class="form-group">
-                <label>First name</label>
-                <input type="text" name="firstname" class="form-control">
-            </div>
+            <?php echo $form->field($model, 'firstname') ?>
         </div>
-
         <div class="col">
-            <div class="form-group">
-                <label>Last name</label>
-                <input type="text" name="lastname" class="form-control">
-            </div>
+            <?php echo $form->field($model, 'lastname') ?>
         </div>
     </div>
 
-    <div class="form-group">
-        <label>Email</label>
-        <input type="text" name="email" class="form-control">
-    </div>
-
-    <div class="form-group">
-        <label>password</label>
-        <input type="password" name="password" class="form-control">
-    </div>
-
-    <div class="form-group">
-        <label>Confirm Password</label>
-        <input type="password" name="confirmPassword" class="form-control">
-    </div>
+    <?php echo $form->field($model, 'email') ?>
+    <?php echo $form->field($model, 'password')->passwordField() ?>
+    <?php echo $form->field($model, 'confirmPassword') ?>
 
     <button type="submit" class="btn btn-primary">Submit</button>
+<?php \YiYang\Clinico\core\form\Form::end() ?>
 
-</form>
