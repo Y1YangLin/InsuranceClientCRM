@@ -2,7 +2,7 @@
     "name": "yi-yang/clinico",
     "autoload": {
         "psr-4": {
-            "YiYang\\Clinico": "./src"
+            "YiYang\\Clinico\\": "./src"
         }
     },
     "authors": [
@@ -11,5 +11,7 @@
             "email": "minecr225@gmail.com"
         }
     ],
-    "require": {}
+    "require": {
+        "vlucas/phpdotenv": "*"
+    }
 }

@@ -1,12 +1,29 @@
 <?php
 
-require_once __DIR__ . "/../vendor/autoload.php";
-
 use YiYang\Clinico\core\Application;
 use YiYang\Clinico\controllers\SiteController;
 use YiYang\Clinico\controllers\AuthController;
+use Dotenv\Dotenv;
 
-$app = new Application(dirname(__DIR__));
+require_once __DIR__ . "/../../vendor/autoload.php";
+
+// load .env files
+$dotenv = Dotenv::createImmutable(dirname(__DIR__));
+$dotenv->load();
+
+
+$config = [
+
+    'db' => [
+        'dsn' => $_ENV['DB_DSN'],
+        'user' => $_ENV['DB_USER'],
+        'password' => $_ENV['DB_PASSWORD'],
+    ]
+
+];
+
+// return src and config
+$app = new Application(dirname(__DIR__), $config);
 
 
 $app->router->get("/", [SiteController::class, "home"]);
