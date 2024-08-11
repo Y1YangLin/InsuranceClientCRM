@@ -14,21 +14,29 @@ class Database
         $password = $config['password'] ?? '';
 
         $this->pdo = new \PDO($dsn, $user, $password);
-        // let PDO show exception
+        // let PDO shows exception
         $this->pdo->setAttribute(\PDO::ATTR_ERRMODE, \PDO::ERRMODE_EXCEPTION);
     }
 
     public function applyMigrations()
     {
+        // create Migration Table in DB
         $this->createMigrationsTable();
+
+        //從取得已經applied 的 migration
         $appliedMigrations = $this->getAppliedMigrations();
 
+        // initialize for new coming migrations
         $newMigrations = [];
+        // looking for migration files in /migrations folder
         $files = scandir(Application::$ROOT_DIR . '/migrations');
 
+        // 用array_diff 對 $files 中的migraion檔案及已經applied 過的migration檔案取差集
+        // 差集 == 要 apply 的 migrations
         $toApplyMigrations = array_diff($files, $appliedMigrations);
         
         foreach($toApplyMigrations as $migration){
+
             if($migration === '.' || $migration === '..'){
                 continue;
             }
@@ -37,24 +45,22 @@ class Database
             $className = pathinfo($migration, PATHINFO_FILENAME);
 
             $instance = new $className();
-            echo "Applying migration $migration" . PHP_EOL;
+            $this->log("Applying migration $migration");
             $instance->up();
-            echo "Applied migration $migration" . PHP_EOL;;
+            $this->log("Applied migration $migration");
 
             $newMigrations[] = $migration;
 
-            if(!empty($newMigrations))
-            {
-                $this->saveMigrations($newMigrations);
-            }else{
-                echo "All migrations are applied ";
-            }
-            // echo '<pre>';
-            // var_dump($className);
-            // echo '</pre>';
-            // exit;
         }
 
+        // var_dump($newMigrations);
+        // exit;
+
+        if(!empty($newMigrations)){
+            $this->saveMigrations($newMigrations);
+        }else{
+            $this->log("All migrations are applied");
+        }
 
     }
     
@@ -78,10 +84,17 @@ class Database
 
     public function saveMigrations(array $migrations)
     {   
-        $this->pdo->prepare("INSERT INTO migrations (migraion) VALUES
-            ('m0001_initial.php'),
-            ('m0002_something.php'),
+        // implode: join array with a string
+        $str = implode(",", array_map(fn($m) => "('$m')", $migrations));
+
+        $statement = $this->pdo->prepare("INSERT INTO migrations (migration) VALUES
+            $str
         ");
+        $statement->execute();
+    }
+
+    protected function log($message){
+        echo '[' . date('Y-m-d H:i:s') . '] - ' . $message . PHP_EOL;
     }
 
 }
