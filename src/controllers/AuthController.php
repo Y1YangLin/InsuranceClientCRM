@@ -2,9 +2,11 @@
 
 namespace YiYang\Clinico\controllers;
 
+use YiYang\Clinico\core\Application;
 use YiYang\Clinico\core\Controller;
 use YiYang\Clinico\core\Request;
 use YiYang\Clinico\models\RegisterModel;
+use YiYang\Clinico\models\User;
 
 class AuthController extends Controller{
 
@@ -20,15 +22,21 @@ class AuthController extends Controller{
     public function register(Request $request)
     {
         $errors = [];
-        $registerModel = new RegisterModel();
+        $user = new User();
         
         if($request->isPost()){
             
-            $registerModel->loadData($request->getBody());
+            $user->loadData($request->getBody());
             
             // validation data from frontend
-            if($registerModel->validate() && $registerModel->register()){
-                return "SUCCESS";
+            if($user->validate() && $user->save()){
+                
+                //make session
+                Application::$app->session->setFlash('success', 'Thanks for registering');
+                Application::$app->response->redirect('/');
+
+                // dont let code below to be execute
+                exit;
             }
 
 
@@ -38,14 +46,14 @@ class AuthController extends Controller{
             // }
 
             return $this->render("register", [
-                "model" => $registerModel
+                "model" => $user
             ]);
         }
 
         $this->setLayout("auth");
 
         return $this->render("register", [
-            "model" => $registerModel
+            "model" => $user
         ]);
     }
 
