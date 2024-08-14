@@ -8,6 +8,14 @@
 
 
 # 架構圖
-// Todo
-# 感言
-// Todo
+
+// TODO
+
+# 實作目的
+  畢業專題採用 Laravel 框架進行開發，那時候我對框架的感受就是有好多功能強大的 method helper Routing etc ...
+  框架都幫我寫好 我只要想好我自己的 Controller 或是 views models 要怎麼開發就好了 好爽喔，
+  但那個 Middleware 目錄是什麼阿裡面一堆定義好的class在相互導用好神奇喔。
+
+  於是我打算自己試試看 Build 一個框架出來、順便理解學習這些框架比較底層的技術打底。
+  之後的學習目標是 RAG 跟 Angular 框架以及更深入 Typescript
+  
