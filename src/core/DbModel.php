@@ -5,10 +5,13 @@ namespace YiYang\Clinico\core;
 abstract class DbModel extends Model{
 
     // must return string table name
-    abstract public function tableName(): string;
+    abstract static public function tableName(): string;
 
     // return database column names
     abstract public function attributes(): array;
+
+    //
+    abstract static public function primaryKey(): string;
 
     public function save(){
         $tableName = $this->tableName();
@@ -21,10 +24,6 @@ abstract class DbModel extends Model{
         foreach($attributes as $attribute){
             $statement->bindValue(":$attribute", $this->{$attribute});
         }
-        // echo '<pre>';
-        // var_dump($statement, $params, $attributes);
-        // echo '</pre>';
-        // exit;
 
         $statement->execute();
         return true;
@@ -32,7 +31,7 @@ abstract class DbModel extends Model{
     }
 
     // [email => test123@gmail.com, firstname => test]
-    public function findOne($where){
+    public static function findOne($where){
         // cannot use self but static
         // because static can call actual class self can't
         $tableName = static::tableName();
@@ -50,7 +49,7 @@ abstract class DbModel extends Model{
         return $statement->fetchObject(static::class);
     }
 
-    public function prepare($sql){
+    public static function prepare($sql){
         return Application::$app->db->pdo->prepare($sql);
     }
 

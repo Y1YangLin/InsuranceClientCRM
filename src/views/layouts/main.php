@@ -1,7 +1,6 @@
 <?php
 use YiYang\Clinico\core\Application;
 
-
 ?>
 
 <!doctype html>

@@ -6,12 +6,12 @@ use YiYang\Clinico\core\Application;
 use YiYang\Clinico\core\Model;
 use YiYang\Clinico\models\User;
 
-// extends just Model because it doesnt need to use database
 class LoginForm extends Model{
 
     public string $email = '';
     public string $password = '';
     
+    // implement rules method
     public function rules(): array
     {
         return [
@@ -33,7 +33,7 @@ class LoginForm extends Model{
     public function login(){
 
         $user = User::findOne(['email' => $this->email]);
-
+        
         if(!$user){
             $this->addError('email', 'User does not exist with this email');
             return false;
@@ -43,9 +43,6 @@ class LoginForm extends Model{
             $this->addError('password', 'Password is incorrect');
             return false;
         }
-
-        var_dump($user);
-        exit;
 
         return Application::$app->login($user);
     }
