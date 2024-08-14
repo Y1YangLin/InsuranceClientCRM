@@ -3,11 +3,17 @@
 namespace YiYang\Clinico\core;
 
 use YiYang\Clinico\core\Application;
+use YiYang\Clinico\core\middlewares\BaseMiddleware;
 
 class Controller
 {
     public string $layout = "main";
+    public string $action = "";
 
+    /**
+     * @var \YiYang\Clinico\core\middlewares\BaseMiddleware[]
+     */
+    public array $middlewares = [];
 
     public function setLayout($layout)
     {
@@ -19,6 +25,9 @@ class Controller
         return Application::$app->router->renderView($view, $params);
     }
 
-    
+    public function registerMiddleware(BaseMiddleware $middleware)
+    {
+        $this->middlewares[] = $middleware;
+    }
 
 }

@@ -8,8 +8,15 @@ use YiYang\Clinico\core\Request;
 use YiYang\Clinico\core\Response;
 use YiYang\Clinico\models\LoginForm;
 use YiYang\Clinico\models\User;
+use YiYang\Clinico\core\middlewares\AuthMiddleware;
 
 class AuthController extends Controller{
+
+    public function __construct() {
+
+        $this->registerMiddleware(new AuthMiddleware(['profile']));
+    
+    }
 
     public function login(Request $request, Response $response)
     {
@@ -66,6 +73,17 @@ class AuthController extends Controller{
         return $this->render("register", [
             "model" => $user
         ]);
+    }
+
+    public function logout(Request $request, Response $response)
+    {
+        Application::$app->logout();
+        $response->redirect('/');
+    }
+
+    public function profile()
+    {
+        return $this->render('profile');
     }
 
 }

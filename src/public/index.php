@@ -34,6 +34,12 @@ $app->router->post("/login", [AuthController::class, "login"]);
 $app->router->get("/register", [AuthController::class, "register"]);
 $app->router->post("/register", [AuthController::class, "register"]);
 
+// logout suggest to use post is safe, I use get here just to test
+$app->router->get("/logout", [AuthController::class, "logout"]);
+
+//Protected Routes
+$app->router->get("/profile", [AuthController::class, "profile"]);
+
 $app->router->post("/contact", [SiteController::class, "handleContact"]);
 
 

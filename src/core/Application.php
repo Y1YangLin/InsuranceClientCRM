@@ -8,17 +8,19 @@ class Application
 {
     public static string $ROOT_DIR;
 
+    public string $layout = 'main';
     public string $userClass;
     public Router $router;
     public Request $request;
     public Response $response;
     public Database $db;
+
     // might be none
     public ?DbModel $user;
     public Session $session;
 
     public static Application $app;
-    public Controller $controller;
+    public ?Controller $controller = null;
 
     public function __construct($rootPath, array $config)
     {
@@ -26,7 +28,7 @@ class Application
         self::$ROOT_DIR = $rootPath;
         self::$app = $this;
         
-        $this->setController(new SiteController());
+        // $this->setController(new SiteController());
 
         $this->request = new Request();
         $this->response = new Response();
@@ -79,6 +81,12 @@ class Application
     {
         $this->user = null;
         $this->session->remove('user');
+    }
+
+    public static function isGuest()
+    {
+        // user is guest
+        return !self::$app->user;
     }
 
 }

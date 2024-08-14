@@ -53,6 +53,8 @@ class Router
         // Originally it was string then instance
         if (is_array($callback)){
             Application::$app->controller = new $callback[0]();
+            //set controller action
+            Application::$app->controller->action = $callback[1];
             $callback[0] = Application::$app->controller;
         }  
 
@@ -89,9 +91,13 @@ class Router
 
     protected function layoutContent()
     {
-        
-        $layout = Application::$app->controller->layout;
 
+        $layout = Application::$app->layout;
+
+        if(Application::$app->controller){
+            $layout = Application::$app->controller->layout;
+        }
+        
         ob_start();
         include_once Application::$ROOT_DIR . "/views/layouts/$layout.php";
         return ob_get_clean();
