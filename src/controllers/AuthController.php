@@ -5,17 +5,28 @@ namespace YiYang\Clinico\controllers;
 use YiYang\Clinico\core\Application;
 use YiYang\Clinico\core\Controller;
 use YiYang\Clinico\core\Request;
-use YiYang\Clinico\models\RegisterModel;
+use YiYang\Clinico\core\Response;
+use YiYang\Clinico\models\LoginForm;
 use YiYang\Clinico\models\User;
 
 class AuthController extends Controller{
 
-    public function login()
+    public function login(Request $request, Response $response)
     {
     
-        $this->setLayout("auth");
+        $loginForm = new LoginForm();
+        if($request->isPost()){
+            $loginForm->loadData($request->getBody());
+            if($loginForm->validate() && $loginForm->login()){
+                $response->redirect('/');
+                return;
+            }
+        }
 
-        return $this->render("login");
+        $this->setLayout("auth");
+        return $this->render("login", [
+            'model' => $loginForm
+        ]);
 
     }
 

@@ -1,3 +1,7 @@
+<?php 
+    /**@var $model \YiYang\Clinico\models\User */
+?>
+
 <h1>Create an account</h1>
 
 <?php $form = \YiYang\Clinico\core\form\Form::begin('', 'post') ?>

@@ -2,6 +2,8 @@
 
 namespace YiYang\Clinico\core;
 
+use YiYang\Clinico\controllers\SiteController;
+
 class Application
 {
     public static string $ROOT_DIR;
@@ -18,7 +20,8 @@ class Application
     {
         self::$ROOT_DIR = $rootPath;
         self::$app = $this;
-
+        
+        $this->controller = new SiteController();
         $this->request = new Request();
         $this->response = new Response();
         $this->session = new Session();
