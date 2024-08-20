@@ -2,6 +2,9 @@
 
 namespace YiYang\Clinico\core;
 
+use YiYang\Clinico\core\exception\ForbiddenException;
+use YiYang\Clinico\core\exception\NotFoundException;
+
 class Router
 {
     public Request $request;
@@ -36,8 +39,7 @@ class Router
         $callback = $this->routes[$method][$path] ?? false;
 
         if ($callback === false){
-            $this->response->setStatusCode(404);
-            return $this->renderView("_404");
+            throw new NotFoundException();
         }        
 
         // var_dump($callback);
@@ -52,10 +54,18 @@ class Router
         // create an instance of controller class name , so call_user_func can work
         // Originally it was string then instance
         if (is_array($callback)){
-            Application::$app->controller = new $callback[0]();
+            /** @var \YiYang\Clinico\core\Controller $controller */
+
+            $controller = new $callback[0]();
+            Application::$app->controller = $controller;
+            
             //set controller action
-            Application::$app->controller->action = $callback[1];
-            $callback[0] = Application::$app->controller;
+            $controller->action = $callback[1];
+            $callback[0] = $controller;
+
+            foreach($controller->getMiddlewares() as $middleware){
+                $middleware->execute();
+            }
         }  
 
         

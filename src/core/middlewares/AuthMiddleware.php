@@ -3,6 +3,7 @@
 namespace YiYang\Clinico\core\middlewares;
 
 use YiYang\Clinico\core\Application;
+use YiYang\Clinico\core\exception\ForbiddenException;
 
 class AuthMiddleware extends BaseMiddleware{
 
@@ -21,8 +22,10 @@ class AuthMiddleware extends BaseMiddleware{
     {
         if(Application::isGuest()){
 
+            // action is empty means theres no controller method to do
+            // method in url matchs in $action means Guest is accessing protected pages
             if(empty($this->actions) || in_array(Application::$app->controller->action, $this->actions)){
-                throw
+                throw new ForbiddenException();
             }
         }
     }
