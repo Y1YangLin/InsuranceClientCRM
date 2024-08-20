@@ -1,5 +1,7 @@
 <?php
+/** @var $this \YiYang\Clinico\core\View */
 
+$this->title = 'Profile';
 
 ?>
 
