@@ -5,6 +5,8 @@ namespace YiYang\Clinico\controllers;
 use YiYang\Clinico\core\Controller;
 use YiYang\Clinico\core\Application;
 use YiYang\Clinico\core\Request;
+use YiYang\Clinico\core\Response;
+use YiYang\Clinico\models\ContactForm;
 
 class SiteController extends Controller{
 
@@ -18,9 +20,23 @@ class SiteController extends Controller{
         return $this->render("home", $params);
     }
 
-    public function contact()
+    public function contact(Request $request, Response $response)
     {
-        return $this->render("contact");
+
+        $contact = new ContactForm();
+
+        if($request->isPost()){
+            //load form request data in ContactForm Model
+            $contact->loadData($request->getBody());
+            if($contact->validate() && $contact->send()){
+                Application::$app->session->setFlash('success', 'Thanks for contacting us.');
+                return $response->redirect('/contact');
+            }
+        }
+
+        return $this->render("contact", [
+            'model' => $contact
+        ]);
     }
 
     public function handleContact(Request $request)

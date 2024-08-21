@@ -1,6 +1,9 @@
 <?php
 
 /** @var $this \YiYang\Clinico\core\View */
+/** @var $model \YiYang\Clinico\models\ContactForm */
+
+use \YiYang\Clinico\core\form\TextareaField;
 
 $this->title = 'Contact';
 
@@ -8,23 +11,14 @@ $this->title = 'Contact';
 
 <h1>Contact</h1>
 
-<form action="/contact" method="post">
+<?php $form = \YiYang\Clinico\core\form\Form::begin('', 'post') ?>
 
-    <div class="form-group">
-        <label>Subject</label>
-        <input type="text" name="subject" class="form-control">
-    </div>
+<?php echo $form->field($model, 'subject') ?> 
+<?php echo $form->field($model, 'email') ?> 
 
-    <div class="form-group">
-        <label>Email</label>
-        <input type="text" name="email" class="form-control">
-    </div>
+<?php echo new TextareaField($model, 'body'); ?> 
 
-    <div class="form-group">
-        <label>Body</label>
-        <input type="text" name="body" class="form-control">
-    </div>
+<button type="submit" class="btn btn-primary">Submit</button>
 
-    <button type="submit" class="btn btn-primary">Submit</button>
+<?php \YiYang\Clinico\core\form\Form::end(); ?>
 
-</form>
