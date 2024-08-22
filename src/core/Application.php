@@ -3,6 +3,8 @@
 namespace YiYang\Clinico\core;
 
 use YiYang\Clinico\controllers\SiteController;
+use YiYang\Clinico\core\db\Database;
+use YiYang\Clinico\core\db\DbModel;
 
 class Application
 {
@@ -17,7 +19,7 @@ class Application
     public View $view;
 
     // might be none
-    public ?DbModel $user;
+    public ?UserModel $user;
     public Session $session;
 
     public static Application $app;
@@ -76,7 +78,7 @@ class Application
         return $this->controller;
     }
 
-    public function login(DbModel $user)
+    public function login(UserModel $user)
     {
         // save user in the session
         $this->user = $user;

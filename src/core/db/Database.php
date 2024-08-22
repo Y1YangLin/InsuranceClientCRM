@@ -1,6 +1,9 @@
 <?php
 
-namespace YiYang\Clinico\core;
+namespace YiYang\Clinico\core\db;
+
+use YiYang\Clinico\core\Application;
+
 
 class Database
 {

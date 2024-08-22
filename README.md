@@ -17,5 +17,5 @@
   但那個 Middleware 目錄是什麼阿裡面一堆定義好的class在相互導用好神奇喔。
 
   於是我打算自己試試看 Build 一個框架出來、順便理解學習這些框架比較底層的技術打底。
-  之後的學習目標是 RAG 跟 Angular 框架以及更深入 Typescript
+  之後的學習目標是 RAG 跟 Angular 框架以及更深入 Typescript, NodeJs ...
   

@@ -1,6 +1,9 @@
 <?php
 
-namespace YiYang\Clinico\core;
+namespace YiYang\Clinico\core\db;
+
+use YiYang\Clinico\core\Model;
+use YiYang\Clinico\core\Application;
 
 abstract class DbModel extends Model{
 
