@@ -22,6 +22,9 @@ $config = [
 
 ];
 
+// var_dump($config['userClass']);
+// exit;
+
 // return src and config
 $app = new Application(dirname(__DIR__), $config);
 

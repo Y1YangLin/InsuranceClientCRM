@@ -13,7 +13,7 @@ $dotenv->load();
 
 
 $config = [
-
+    'userClass' => \YiYang\Clinico\models\User::class,
     'db' => [
         'dsn' => $_ENV['DB_DSN'],
         'user' => $_ENV['DB_USER'],
