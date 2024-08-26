@@ -15,8 +15,6 @@ class View{
         // 在$layoutContent 中搜尋是否有 "{{content}}"，如果有就將其用 $viewContent替代
         return str_replace("{{content}}", $viewContent, $layoutContent);
 
-        include_once Application::$ROOT_DIR . "/src/views/$view.php";
-
     }
 
     public function renderContent($viewContent)
@@ -26,8 +24,6 @@ class View{
 
         // 在$layoutContent 中搜尋是否有 "{{content}}"，如果有就將其用 $viewContent替代
         return str_replace("{{content}}", $viewContent, $layoutContent);
-
-        include_once Application::$ROOT_DIR . "/src/views/$view.php";
 
     }
 

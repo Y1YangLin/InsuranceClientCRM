@@ -1,5 +1,7 @@
 <?php 
     /**@var $model \YiYang\Clinico\models\User */
+
+    $this->title = 'Login';
 ?>
 
 <h1>Login</h1>

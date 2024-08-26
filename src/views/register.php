@@ -1,5 +1,7 @@
 <?php 
     /**@var $model \YiYang\Clinico\models\User */
+
+    $this->title = 'Register';
 ?>
 
 <h1>Create an account</h1>

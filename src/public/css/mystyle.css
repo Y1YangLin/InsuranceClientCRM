@@ -1,0 +1,82 @@
+@import url(https://fonts.googleapis.com/earlyaccess/cwtexfangsong.css);
+hr
+{
+    width: 100%;
+}
+
+.container
+{
+    display: flex;
+    flex-direction: column;
+}
+
+.container-label
+{
+    display: inline-flex;
+    align-items: center;
+    flex-wrap: wrap;
+    
+}
+
+.logo1
+{
+    width: 8%;
+}
+
+.description
+{
+    font-size: large;
+    font-weight: 1000;
+    margin-bottom: 0;
+}
+
+.horizonLine
+{
+    display: block;
+    margin-top: 0;
+    
+}
+
+.container-query
+{
+
+    display: inline-flex;
+    align-items: center;
+    height: 150px;
+    width: auto;
+    gap: 30px;
+    background-color: #b0b7b8;
+
+    border: 1;
+    border-style: solid;
+}
+
+#btn1
+{
+    width: 120px;
+    height: auto;
+    background-color: #0d47a6;
+    --bs-btn-color: white;
+    margin-right: 20px;
+}
+
+.container-label2
+{
+
+    display: inline-flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: 10px;
+    margin-top: 100px;
+
+}
+
+.logo2
+{
+    width: 8%;
+}
+
+.container-relation-graph
+{
+    /* TODO */
+}
