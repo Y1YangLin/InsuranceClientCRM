@@ -4,6 +4,7 @@ use YiYang\Clinico\core\Application;
 use YiYang\Clinico\controllers\SiteController;
 use YiYang\Clinico\controllers\AuthController;
 use Dotenv\Dotenv;
+use YiYang\Clinico\controllers\ApiController;
 
 require_once __DIR__ . "/../../vendor/autoload.php";
 
@@ -40,6 +41,9 @@ $app->router->post("/register", [AuthController::class, "register"]);
 
 // logout suggest to use post is safe, I use get here just to test
 $app->router->get("/logout", [AuthController::class, "logout"]);
+
+//RESTful api
+$app->router->get("/api/policyholders", [ApiController::class, "findPolicyholder"]);
 
 //Protected Routes
 $app->router->get("/profile", [AuthController::class, "profile"]);

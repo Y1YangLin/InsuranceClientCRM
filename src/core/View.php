@@ -12,6 +12,9 @@ class View{
         $viewContent = $this->renderOnlyView($view, $params);
         $layoutContent = $this->layoutContent();
         
+        // var_dump(dirname(__FILE__));
+        // exit;
+
         // 在$layoutContent 中搜尋是否有 "{{content}}"，如果有就將其用 $viewContent替代
         return str_replace("{{content}}", $viewContent, $layoutContent);
 
